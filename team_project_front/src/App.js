@@ -50,6 +50,25 @@ const App = () => {
     })
   }
 
+  const handleUpdate = (e) => {
+    axios
+      .put(
+        `http://localhost:3001/games/${gameData._id}`,
+        {
+          title: e.target[0].value,
+          genre: e.target[1].value,
+          completed: e.target[2].value
+        }
+      )
+      .then(() => {
+        axios
+          .get('http://localhost:3001/games')
+          .then((response) => {
+            setGames(response.data)
+          })
+      })
+  }
+
   //connects to api and pulls all games
   useEffect(() => {
     axios
