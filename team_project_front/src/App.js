@@ -7,6 +7,7 @@ const App = () => {
   let [title, setTitle] = useState('')
   let [genre, setGenre] = useState('')
   let [completed, setCompleted] = useState(false)
+  let [gameId, setGameId] = useState()
   let [games, setGames] = useState([])//state of api array //change api array state
 
   const handleTitle = (e) => {
@@ -17,6 +18,10 @@ const App = () => {
   }
   const handleCompleted = (e) => {
     setCompleted(e.target.checked)
+  }
+
+  const handleId = (e) => {
+    setGameId(games._id)
   }
 
   const handleGameForm = (e) => {
@@ -50,24 +55,31 @@ const App = () => {
     })
   }
 
-  // const handleUpdate = (e) => {
-  //   axios
-  //     .put(
-  //       `http://localhost:3001/games/${gameData._id}`,
-  //       {
-  //         title: e.target[0].value,
-  //         genre: e.target[1].value,
-  //         completed: e.target[2].checked
-  //       }
-  //     )
-  //     .then(() => {
-  //       axios
-  //         .get('http://localhost:3001/games')
-  //         .then((response) => {
-  //           setGames(response.data)
-  //         })
-  //     })
-  // }
+  const handleUpdate = ( gameData) => {
+    axios
+      .put(
+        `http://localhost:3001/games/${gameData._id}`,
+        {
+          title: gameData.title,
+          genre: gameData.genre,
+          completed: gameData.completed,
+          gameId: gameData._id
+        }
+      )
+      .then(() => {
+        axios
+          .get('http://localhost:3001/games')
+          .then((response) => {
+            setGames(response.data)
+          })
+      })
+  }
+  const editButton = () => {
+    console.log(handleId)
+
+    
+
+  }
 
   //connects to api and pulls all games
   useEffect(() => {
@@ -94,6 +106,9 @@ const App = () => {
       <GameIndex
         games={games}
         handleDelete={handleDelete}
+        handleUpdate={handleUpdate}
+        handleTitle={handleTitle}
+        editButton={editButton}
       />
 
     </div>
