@@ -7,7 +7,7 @@ const App = () => {
   let [genra, setGenra] = useState()
   let [completed, setCompleted] = useState(false)
 
-  
+
   return (
     <div className="container">
       <h1>Video game Stats Tracker</h1>
