@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import GameIndex from './components/GameIndex'
 import GameForm from './components/GameForm'
 
 const App = () => {
@@ -45,7 +46,7 @@ const App = () => {
         setGames(response.data)
         console.log(games)
       })
-  })
+  },[])
 
   return (
     <div className="container">
@@ -59,6 +60,10 @@ const App = () => {
 
         </form>
       </div>
+
+      <GameIndex
+       games={games}
+      />
 
     </div>
   )
