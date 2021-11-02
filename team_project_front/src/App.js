@@ -37,7 +37,7 @@ const App = () => {
 
   }
 
-  //connects to api and pulls all games 
+  //connects to api and pulls all games
   useEffect(() => {
     axios
       .get('http://localhost:3001/games')
@@ -47,10 +47,6 @@ const App = () => {
       })
   })
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 8b28e3699ca34db84f5969ba5e008a483e4fd3c4
   return (
     <div className="container">
       <h1>Video game Stats Tracker</h1>
