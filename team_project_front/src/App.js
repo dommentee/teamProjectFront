@@ -57,7 +57,7 @@ const App = () => {
         {
           title: e.target[0].value,
           genre: e.target[1].value,
-          completed: e.target[2].value
+          completed: e.target[2].checked
         }
       )
       .then(() => {
