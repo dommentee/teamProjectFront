@@ -35,7 +35,19 @@ const App = () => {
         setGames(response.data)
       })
     })
+  }
 
+  const handleDelete = (gameData) => {
+    axios
+    .delete(`http://localhost:3001/games/${gameData._id}`)
+    .then(() => {
+      axios
+        .get('http://localhost:3001/games')
+        .then((response) => {
+          setGames(response.data)
+          console.log(games)
+      })
+    })
   }
 
   //connects to api and pulls all games
