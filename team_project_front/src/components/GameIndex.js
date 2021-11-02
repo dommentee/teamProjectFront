@@ -13,7 +13,6 @@ const GameIndex = (props) => {
               <div className="info">Title: {game.title}</div>
               <div className="info">Genre: {game.genre}</div>
               <div className="info">Completed: {game.completed}</div>
-              
             </div>
           )
        })}

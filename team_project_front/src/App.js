@@ -69,7 +69,6 @@ const App = () => {
           <input type="text" onChange={handleGenre} />
           <input type="checkbox" onChange={handleCompleted} />
           <input type="submit" value="submit"/>
-
         </form>
       </div>
 
