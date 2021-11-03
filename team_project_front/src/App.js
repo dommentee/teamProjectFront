@@ -7,21 +7,25 @@ const App = () => {
   let [title, setTitle] = useState('')
   let [genre, setGenre] = useState('')
   let [completed, setCompleted] = useState(false)
-  let [gameId, setGameId] = useState()
   let [games, setGames] = useState([])//state of api array //change api array state
+
+  let [editTitle, setEditTitle] = useState('')
+  let [editGenre, setEditGenre] = useState('')
+  let [editCompleted, setEditCompleted] = useState(false)
+  let [editGameId, setEditGameId] = useState('')
+
 
   const handleTitle = (e) => {
     setTitle(e.target.value)
+    setEditTitle(e.target.value)
   }
   const handleGenre = (e) => {
     setGenre(e.target.value)
+    setEditGenre(e.target.value)
   }
   const handleCompleted = (e) => {
     setCompleted(e.target.checked)
-  }
-
-  const handleId = (e) => {
-    setGameId(games._id)
+    setEditCompleted(e.target.checked)
   }
 
   const handleGameForm = (e) => {
@@ -55,15 +59,16 @@ const App = () => {
     })
   }
 
-  const handleUpdate = ( gameData) => {
+
+  const handleUpdate = (e) => {
+    e.preventDefault()
     axios
       .put(
-        `http://localhost:3001/games/${gameData._id}`,
+        `http://localhost:3001/games/${editGameId}`,
         {
-          title: gameData.title,
-          genre: gameData.genre,
-          completed: gameData.completed,
-          gameId: gameData._id
+          title: editTitle,
+          genre: editGenre,
+          completed: editCompleted,
         }
       )
       .then(() => {
@@ -74,11 +79,12 @@ const App = () => {
           })
       })
   }
-  const editButton = () => {
-    console.log(handleId)
 
-    
-
+  const editButton = (gameData) => {
+    setEditGameId(gameData._id)
+    setEditTitle(gameData.title)
+    setEditGenre(gameData.genre)
+    setEditCompleted(gameData.completed)
   }
 
   //connects to api and pulls all games
@@ -100,6 +106,15 @@ const App = () => {
           <input type="text" onChange={handleGenre} />
           <input type="checkbox" onChange={handleCompleted} />
           <input type="submit" value="submit"/>
+        </form>
+      </div>
+
+      <div className="edit_form">
+        <form onSubmit={handleUpdate}>
+          <input type="text" onChange={handleTitle} value={editTitle}/>
+          <input type="text" onChange={handleGenre} value={editGenre}/>
+          <input type="checkbox" onChange={handleCompleted}/>
+          <input type="submit" value="update"/>
         </form>
       </div>
 
